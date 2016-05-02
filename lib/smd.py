@@ -1,7 +1,7 @@
 # smd.py, smd/lib/
 # smd: sceext's markdown style
 
-from . import log
+from . import log, b
 
 from . import smd_config
 
@@ -59,6 +59,11 @@ def _c_concat_line(lines):
     out = ''
     for l in lines:
         out += l['text']
+    # add \n after text
+    out += '\n\n'
+    # add last update after text
+    out += '# smd compile at ' + b.make_last_update() + '\n\n'
+    
     return out
 
 def _c_remove_xml_comment(raw):
@@ -82,8 +87,8 @@ def _c_remove_xml_comment(raw):
                 rest = ''
                 continue
             # split by -->
-            one, rest = rest.split(CE, 1)
-            out += one
+            rest = rest.split(CE, 1)[1]
+            # NOTE ignore comment text here
             flag_comment = False	# reset flag
             continue
         # check no <!--
@@ -110,7 +115,7 @@ def _c_normal_line_ending(raw):
 
 # first process smd lines
 def _c_process_line(raw):
-    FC = smd_config.SMD_LINE_FRIST_CHAR
+    FC = smd_config.SMD_LINE_FIRST_CHAR
     
     out = []
     # check each line
@@ -159,7 +164,7 @@ def _c_process_line(raw):
             }
             out.append(one)
             one = {
-                'type' : 'skip', 
+                'type' : '', 
                 'text' : rest, 
                 'index' : i, 
             }

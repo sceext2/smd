@@ -27,9 +27,9 @@ def _p_args(args):
     while len(rest) > 0:
         one, rest = rest[0], rest[1:]
         if one in ['-o', '--output']:
-            etc['out'] = rest[0]
+            etc['out'], rest = rest[0], rest[1:]
         else:	# default, src file
-            etc['src'] = rest[0]
+            etc['src'] = one
     # done
 
 def _read_src(name):
