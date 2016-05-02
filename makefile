@@ -8,12 +8,12 @@ DOC_OUT=./smd_doc.out.txt
 target: clean
 .PHONY: target
 
-clear: clean_py
-.PHONY: clean_py
+clean: clean_py
+.PHONY: clean
 
 clean_py:
-.PHONY: clean_py
 	find . | grep "__pycache__" | xargs rm -r
+.PHONY: clean_py
 
 test: $(DOC_OUT)
 .PHONY: test
