@@ -5,8 +5,8 @@ import os, sys
 SMD_LOG_PREFIX = 'smd::'
 
 # base print function
-def _p(text):
-    sys.stdout.write(text)
+def _p(text, end='\n'):
+    sys.stdout.write(text + end)
 
 def _dp(prefix, text):
     out = SMD_LOG_PREFIX + prefix + text

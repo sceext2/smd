@@ -224,7 +224,7 @@ def _c_scan_clip(raw, line_n):
         # check \ mode
         if flag_s:
             if not one in SC:
-                log.w('unknow slash char [\\' + one + '] at line ' + str(line_n) + ': ' + raw + '')
+                log.w('unknow slash char [\\' + one + '] at line ' + str(line_n + 1) + ': ' + raw + '')
                 # NOTE just ignore bad char
             else:	# do replace
                 out += SC[one]
